@@ -10,3 +10,4 @@ reporting_*
 *.log
 *.docx
 secret.py
+.venv
