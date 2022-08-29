@@ -1,5 +1,4 @@
-# Call Center Campaign - Offsite Retrieval Method
-
+# rankingETL -> send tabuler data, rank, & load in target system 
 <!--ts-->
    * [Objective](#Objective)
    * [Installation](#Installation)
@@ -15,10 +14,9 @@
 The goal of this project is to automate daily loading & tracking of call campaigns. 
 
 # Installation
-Assumption: conda is already installed [link](https://www.anaconda.com/products/individual)
 
 ```bash
-git clone https://github.com/AaronRoethe/Call_Campaign_Offsite.git
+git clone https://github.com/AaronRoethe/rankingETL.git
 ```
 ```bash
 cd Call_Campaign_Offsite
@@ -26,10 +24,6 @@ cd Call_Campaign_Offsite
 ```bash
 setup.bat
 ```
-What this file does:
-- activates conda base env 
-- runs conda create environment.yml 
-- switches to new env
 
 ## Run
 0. Drop ASM zip file into .\data\extract
