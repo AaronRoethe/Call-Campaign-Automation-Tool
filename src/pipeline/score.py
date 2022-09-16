@@ -15,21 +15,20 @@ def rank(df=pd.DataFrame, new_col=str, groups=list, rank_cols=dict):
     df[new_col] = df.groupby(groups)[new_col].cumsum()
     return df
 
-def parent_child_link(df, parent:str, child:str="OutreachID"):
+
+def parent_child_link(df, parent: str, child: str):
     df[child] = df[child].apply(lambda x: str(x))
-    df["Matches"] = df.groupby(["Skill", parent])[child]\
-                        .transform(lambda x: "|".join(x))\
-                        .apply(lambda x: x[:3000])
+    df["Matches"] = (
+        df.groupby(["Group", parent])[child]
+        .transform(lambda x: "|".join(x))
+        .apply(lambda x: x[:3000])
+    )
     return df
 
+
 def stack_inventory(df, grouping):
-    rank_cols = {
-        "meet_target_sla": True,
-        "no_call": False,
-        "age": False,
-        "ToGoCharts": False
-    }
-    # group by phone number or msid & rank highest value org
+    rank_cols = "test"
+    # group & rank highest value org
     find_parent = rank(df, "overall_rank", ["Skill", grouping], rank_cols)
 
     # top overall per group = parent
@@ -42,36 +41,33 @@ def stack_inventory(df, grouping):
     linked = parent_child_link(full_rank, grouping)
     return linked
 
-def split_by_grouping(df):
-    split = "CC_Cross_Reference"
-    notmsid = df[df.Skill != split].copy()
-    msid = df[df.Skill == split].copy()
 
-    scored = stack_inventory(notmsid, "PhoneNumber")
-    msid_scored = stack_inventory(msid, "MasterSiteId")
-    return join_tables(scored, msid_scored)
+def split_by_grouping(df):
+    pass
+
 
 def custom_skill_rank(table, skill, custom_ranking):
     skill = table[table.Skill == skill].copy()
-    scored_skill = rank(skill, "Score", ["Skill", "parent"], custom_ranking)
+    scored_skill = rank(skill, "Score", ["groups", "parent"], custom_ranking)
     return join_tables(scored_skill, table)
+
 
 def scored_inventory(df):
     # split regular inventory
     inventory = split_by_grouping(df)
 
-    split = "CC_ChartFinder"
+    split = "spit"
     custom_inventory = inventory[inventory.Skill == split].copy()
     # if data available in business_lines.json load into scoring logic
-    
+
     business = company_busines_lines()
     business.reverse()
     if isinstance(business, list):
         custom_inventory = load_custom_skills(custom_inventory, business)
         for line in business:
-            custom_inventory = custom_skill_rank(custom_inventory, line.skill, line.scoring)
+            custom_inventory = custom_skill_rank(
+                custom_inventory, line.skill, line.scoring
+            )
 
     post_inventory = join_tables(custom_inventory, inventory)
-    post_inventory.Skill = np.where(post_inventory.Skill == "CC_ChartFinder", "CC_4_Continued Follow-Up", post_inventory.Skill)
     return post_inventory
-                            

@@ -3,10 +3,16 @@ from dataclasses import dataclass
 from datetime import date, datetime, timedelta
 
 import pandas as pd
-from pandas.tseries.holiday import (AbstractHolidayCalendar, Holiday,
-                                    USLaborDay, USMartinLutherKingJr,
-                                    USMemorialDay, USPresidentsDay,
-                                    USThanksgivingDay, nearest_workday)
+from pandas.tseries.holiday import (
+    AbstractHolidayCalendar,
+    Holiday,
+    USLaborDay,
+    USMartinLutherKingJr,
+    USMemorialDay,
+    USPresidentsDay,
+    USThanksgivingDay,
+    nearest_workday,
+)
 
 
 def query_df(df, filter_str):
@@ -14,27 +20,17 @@ def query_df(df, filter_str):
     get_index = df.query(filter_str).index
     return df.index.isin(get_index)
 
-def join_tables(new, orginal, dup_index="OutreachID"):
-    return pd.concat([new, orginal])\
-                    .drop_duplicates([dup_index])\
-                    .reset_index(drop=True)
 
-def time_check(start, comment):
-    executionTime_1 = round(time.time() - start, 2)
-    print("-"*25)
-    print(comment + "\n" + "Time: " + str(executionTime_1))
-    print("-"*25)
+def join_tables(new, orginal, dup_index="IdID"):
+    return pd.concat([new, orginal]).drop_duplicates([dup_index]).reset_index(drop=True)
+
 
 def daily_piv(df):
-    print(df.groupby('Skill')\
-            .agg(   Total=('OutreachID','count'),
-                    Parents=('parent','sum'), 
-                    Phone=('PhoneNumber','nunique'),
-                    MSID=('MasterSiteId','nunique'),
-                    SPI=('SPI', 'nunique'),
-                    Age=('age', 'mean')
-                ).round(1)
-        )
+    df.groupby("Group").agg(
+        Parents=("parent", "sum"),
+        Phone=("PhoneNumber", "nunique"),
+    ).round(1)
+
 
 ### company Business Calender
 class CompanyHoliday(AbstractHolidayCalendar):
