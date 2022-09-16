@@ -1,0 +1,14 @@
+{
+    "tests": {
+        "groups":{
+            "group1":{
+                "color":["blue","|","green"],
+                "size":["small"]
+            },
+            "group2":{
+                "color":["black"],
+                "size":["large","|","medium"]
+            }
+        }
+    }
+}

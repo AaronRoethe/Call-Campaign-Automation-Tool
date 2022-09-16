@@ -1,6 +1,9 @@
 import pandas as pd
 
-import log.log as log
+import logging
+import datetime
+import helpers
+
 import pipeline.clean
 import pipeline.score
 import pipeline.skills
@@ -14,6 +17,22 @@ from pipeline.utils import Business_Days, daily_piv, time_check, x_Bus_Day_ago
 
 bus_day = Business_Days()
 
+args = helpers.handleArgs()
+
+# Read Agency Configuration File
+agencyConfig = helpers.read_json(args.file)['system']
+
+# Set Logging
+logging.basicConfig(
+    level=logging.ERROR,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler(helpers.getProjectRootDir() + '/logs/' + datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S") + '-' + agencyConfig['name'] + '.log'),
+        logging.StreamHandler()
+    ]
+)
+logger=logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
 
 def main(test="n", msid="n", save_test="n"):
     """ main executable to run daily call campaign

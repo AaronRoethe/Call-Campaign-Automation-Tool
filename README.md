@@ -15,29 +15,11 @@ The goal of this project is to automate daily loading & tracking of call campaig
 
 # Installation
 
-```bash
-git clone https://github.com/AaronRoethe/rankingETL.git
-```
-```bash
-cd Call_Campaign_Offsite
-```
-```bash
-setup.bat
-```
 
 ## Run
-0. Drop ASM zip file into .\data\extract
-1. Log in to company VPN
-2. Open cmd, navigate to the project root & run command:
-```cmd
-run.bat
-```
-## Optional - highly recommended:
-### PowerAutomate email attachments transfer [link](https://us.flow.microsoft.com/en-us/)
-- ASM email to .\data\extract
 
-### Task Scheduler [link](https://www.windowscentral.com/how-create-automated-task-using-task-scheduler-windows-10)
-- Create "Basic Task" with time trigger pointing at run.bat
+
+## Optional - highly recommended:
 
 # Process:
 ## Transform:
@@ -67,8 +49,3 @@ run.bat
 3. Sort by project audit type
 4. Create 5 & 10-day sprints based on audit type inventory
 5. Split by skill to assign individual campaigns
-
-## Reporting
-0. Obeya weekly tracking on campaign results
-1. Campaign phone# fall out flow chart
-2. Call volume historical analysis
