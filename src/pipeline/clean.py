@@ -56,7 +56,7 @@ def add_columns(df, tomorrow_str):
     )
     age_sort = {21: 0, 20: 1, 15: 2, 10: 3, 5: 4}
     df["age_sort"] = df["age_category"].map(age_sort)
-    ### map
+    # map
     f1 = df.audit_sort <= 2
     df["sla"] = np.where(f1, 5, 10)
     df["target_sla"] = np.where(f1, 4, 8)

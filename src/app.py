@@ -1,4 +1,3 @@
-import pandas as pd
 import streamlit as st
 
 from frontEnd import sidebar
@@ -148,5 +147,5 @@ with st.expander("Choose Scroing, Order Matters!"):
 
 output = [line.as_dict() for line in inputs if line.skill != "New_skill"]
 
-if st.sidebar.button(f"Submit Changes"):
+if st.sidebar.button("Submit Changes"):
     write_json(output)

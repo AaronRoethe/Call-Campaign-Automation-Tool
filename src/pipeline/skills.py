@@ -3,7 +3,6 @@ import os
 
 import numpy as np
 
-from .tables import CONFIG_PATH, tables
 from .utils import Business_Days, query_df
 
 bus_day = Business_Days()

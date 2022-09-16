@@ -3,16 +3,10 @@ from dataclasses import dataclass
 from datetime import date, datetime, timedelta
 
 import pandas as pd
-from pandas.tseries.holiday import (
-    AbstractHolidayCalendar,
-    Holiday,
-    USLaborDay,
-    USMartinLutherKingJr,
-    USMemorialDay,
-    USPresidentsDay,
-    USThanksgivingDay,
-    nearest_workday,
-)
+from pandas.tseries.holiday import (AbstractHolidayCalendar, Holiday,
+                                    USLaborDay, USMartinLutherKingJr,
+                                    USMemorialDay, USPresidentsDay,
+                                    USThanksgivingDay, nearest_workday)
 
 
 def query_df(df, filter_str):

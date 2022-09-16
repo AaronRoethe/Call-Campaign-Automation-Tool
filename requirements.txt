@@ -1,6 +1,6 @@
-requests
-sqlalchemy
 pandas
-pyodbc
 pyarrow
 pylint
+pyodbc
+requests
+sqlalchemy

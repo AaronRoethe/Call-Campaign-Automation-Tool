@@ -11,7 +11,7 @@ def clean_for_insert(load):
     int_key = dict.fromkeys(int_cols, np.int64)
     date_cols = ["colType"]
     date_key = dict.fromkeys(date_cols, "datetime64[ns]")
-    return df.astype(dict(int_key, **date_key))
+    return load.astype(dict(int_key, **date_key))
 
 
 def before_insert(engine: sqlalchemy.engine, remove, lookup) -> None:

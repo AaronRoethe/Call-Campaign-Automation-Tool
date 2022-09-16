@@ -1,10 +1,8 @@
+import argparse
+import json
+import logging
 import os
 from datetime import datetime
-import json
-import subprocess
-import base64
-import logging
-import argparse
 
 
 def getProjectRootDir():

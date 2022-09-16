@@ -20,7 +20,7 @@ def main():
     # score by group
     scored = pipeline.score.scored_inventory(skilled)
 
-    ### log pivot results
+    # log pivot results
 
     # load
 

@@ -39,6 +39,7 @@ def fallOut(df, file):
         with zip.open(file_name) as raw_file:
             all_orgs = set([int(line[:8]) for line in raw_file])
     missingIds = list(all_orgs.difference(set(df.Ids)))
+    return missingIds
 
 
 ### Input/output static tables ###
@@ -83,7 +84,7 @@ def write_compressed(file_path, table):
                 csv.write_csv(pa_table, out)
 
 
-### push_pull zip file ###
+# push_pull zip file
 def compressed_files(filename, path=Path(LOAD_PATH), table="read", sep=","):
     extract_path = path / filename
     if isinstance(table, str):
