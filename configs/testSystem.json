@@ -1,0 +1,29 @@
+{
+    "name": "testSystem",
+    "extract": {
+        "type": "file",
+        "location": "tests/fixtures/batchFile.csv"
+    },
+    "grouping": {
+        "1": {
+            "color": [
+                "blue|green"
+            ],
+            "size": [
+                "small"
+            ]
+        },
+        "2": {
+            "color": [
+                "black"
+            ],
+            "size": [
+                "large|medium"
+            ]
+        }
+    },
+    "ranking": [
+        "Status",
+        "OrderId"
+    ]
+}

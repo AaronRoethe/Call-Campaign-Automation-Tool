@@ -4,3 +4,5 @@ pylint
 pyodbc
 requests
 sqlalchemy
+
+pytest

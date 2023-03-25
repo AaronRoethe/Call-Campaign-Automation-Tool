@@ -11,3 +11,5 @@ reporting_*
 *.docx
 secret.py
 .venv
+
+!batchFile.csv
